@@ -305,29 +305,12 @@ Write a SQL query to add a column named last_updated with the data type DATE. Pl
 
 PROGRAM:
 
+ 
 mysql> CREATE DATABASE MICROSOFT;
 Query OK, 1 row affected (0.01 sec)
 
 mysql> USE MICROSOFT;
 Database changed
-mysql> CREATE TABLE COMPANY STAFF(
-    -> EMPID INT,
-    -> EMPAGE TINYINT,
-    -> EMPEXPERIENCE SMALLINT,
-    -> EMPGENDER CHAR(1),
-    -> EMPNAME VARCHAR(50),
-    -> EMPADDRESS TINYTEXT,
-    -> EMPSALARY DECIMAL(20,4),
-    -> EMPDEPARTMENT ENUM('HR' , 'IT' , 'SALES' , 'FINANCE' , 'SUPPORT'),
-    -> EMPSKILLS SET('JAVA' , 'PYTHON' ,'SQL' , 'EXCEL' , 'COMMUNICATION'),
-    -> EMPJOININGDATA DATE
-    -> );
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'STAFF(
-EMPID INT,
-EMPAGE TINYINT,
-EMPEXPERIENCE SMALLINT,
-EMPGENDER CHAR(1),
-EMP' at line 1
 mysql>  CREATE TABLE COMPANY_STAFF(
     ->  EMPID INT,
     ->  EMPAGE TINYINT,
@@ -391,16 +374,10 @@ mysql> ALTER TABLE COMPANY_STAFF MODIFY EMPSALARY DECIMAL(12,2);
 Query OK, 0 rows affected (0.12 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
-mysql> ALTER TABLE COMPANY_STAFF RENAME COLUMN EMPNAME TO EMPLOYEE_NAME VARCHAR(50);
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VARCHAR(50)' at line 1
 mysql> ALTER TABLE COMPANY_STAFF RENAME COLUMN EMPNAME TO EMPLOYEE_NAME;
 Query OK, 0 rows affected (0.07 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
-mysql>  ALTER TABLE COMPANY_STAFF RENAME COLUMN JOINING_DATA TO DATE_OF_JOINING;
-ERROR 1054 (42S22): Unknown column 'JOINING_DATA' in 'company_staff'
-mysql>  ALTER TABLE COMPANY_STAFF RENAME COLUMN EMPJOININGDATE TO DATE_OF_JOINING;
-ERROR 1054 (42S22): Unknown column 'EMPJOININGDATE' in 'company_staff'
 mysql>  ALTER TABLE COMPANY_STAFF RENAME COLUMN EMPJOININGDATA TO DATE_OF_JOINING;
 Query OK, 0 rows affected (0.07 sec)
 Records: 0  Duplicates: 0  Warnings: 0
@@ -440,10 +417,8 @@ mysql> RENAME TABLE COMPANY_STAFF TO STAFF_RECORDS;
 Query OK, 0 rows affected (0.07 sec)
 
 mysql> RENAME TABLE STAFF_RECORDS TO COMPANY_STAFF;
-Query OK, 0 rows affected (0.07 sec)
+Query OK, 0 rows affected (0.07 sec) 
 
-mysql> ALTER TABLE COMPANY_STAFF ADD LAST_UPDATED DATE AFTER SKILLS;
-ERROR 1054 (42S22): Unknown column 'SKILLS' in 'company_staff'
 mysql>  ALTER TABLE COMPANY_STAFF ADD LAST_UPDATED DATE AFTER EMPSKILLS;
 Query OK, 0 rows affected (0.10 sec)
 Records: 0  Duplicates: 0  Warnings: 0
