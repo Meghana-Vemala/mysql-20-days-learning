@@ -302,3 +302,172 @@ Q14. Rename the Table Back
 After renaming the table to staff_records, write a SQL query to rename it back to company_staff.
 Q15. Add Last Updated Column
 Write a SQL query to add a column named last_updated with the data type DATE. Place the last_updated column immediately after the skills column.
+
+PROGRAM:
+
+mysql> CREATE DATABASE MICROSOFT;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE MICROSOFT;
+Database changed
+mysql> CREATE TABLE COMPANY STAFF(
+    -> EMPID INT,
+    -> EMPAGE TINYINT,
+    -> EMPEXPERIENCE SMALLINT,
+    -> EMPGENDER CHAR(1),
+    -> EMPNAME VARCHAR(50),
+    -> EMPADDRESS TINYTEXT,
+    -> EMPSALARY DECIMAL(20,4),
+    -> EMPDEPARTMENT ENUM('HR' , 'IT' , 'SALES' , 'FINANCE' , 'SUPPORT'),
+    -> EMPSKILLS SET('JAVA' , 'PYTHON' ,'SQL' , 'EXCEL' , 'COMMUNICATION'),
+    -> EMPJOININGDATA DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'STAFF(
+EMPID INT,
+EMPAGE TINYINT,
+EMPEXPERIENCE SMALLINT,
+EMPGENDER CHAR(1),
+EMP' at line 1
+mysql>  CREATE TABLE COMPANY_STAFF(
+    ->  EMPID INT,
+    ->  EMPAGE TINYINT,
+    ->  EMPEXPERIENCE SMALLINT,
+    -> EMPGENDER CHAR(1),
+    ->  EMPNAME VARCHAR(50),
+    -> EMPADDRESS TINYTEXT,
+    -> EMPSALARY DECIMAL(20,4),
+    -> EMPDEPARTMENT ENUM('HR' , 'IT' , 'SALES' , 'FINANCE' , 'SUPPORT'),
+    ->  EMPSKILLS SET('JAVA' , 'PYTHON' ,'SQL' , 'EXCEL' , 'COMMUNICATION'),
+    ->  EMPJOININGDATA DATE
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> DESC COMPANY_STAFF;
++----------------+----------------------------------------------------+------+-----+---------+-------+
+| Field          | Type                                               | Null | Key | Default | Extra |
++----------------+----------------------------------------------------+------+-----+---------+-------+
+| EMPID          | int                                                | YES  |     | NULL    |       |
+| EMPAGE         | tinyint                                            | YES  |     | NULL    |       |
+| EMPEXPERIENCE  | smallint                                           | YES  |     | NULL    |       |
+| EMPGENDER      | char(1)                                            | YES  |     | NULL    |       |
+| EMPNAME        | varchar(50)                                        | YES  |     | NULL    |       |
+| EMPADDRESS     | tinytext                                           | YES  |     | NULL    |       |
+| EMPSALARY      | decimal(20,4)                                      | YES  |     | NULL    |       |
+| EMPDEPARTMENT  | enum('HR','IT','SALES','FINANCE','SUPPORT')        | YES  |     | NULL    |       |
+| EMPSKILLS      | set('JAVA','PYTHON','SQL','EXCEL','COMMUNICATION') | YES  |     | NULL    |       |
+| EMPJOININGDATA | date                                               | YES  |     | NULL    |       |
++----------------+----------------------------------------------------+------+-----+---------+-------+
+10 rows in set (0.01 sec)
+
+mysql> ALTER TABLE COMPANY_STAFF ADD EMAIL VARCHAR(100);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE COMPANY_STAFF ADD PHONE_NUMBER BIGINT;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE COMPANY_STAFF ADD BONUS DECIMAL(8,2) AFTER EMPSALARY;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE COMPANY_STAFF ADD STATUS VARCHAR(20) AFTER EMPDEPARTMENT;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE COMPANY_STAFF ADD COMPANY_NAME VARCHAR(50) FIRST;
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  ALTER TABLE COMPANY_STAFF ADD QUALIFICATION VARCHAR(50) AFTER EMPNAME;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE COMPANY_STAFF MODIFY EMPNAME VARCHAR(100);
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE COMPANY_STAFF MODIFY EMPSALARY DECIMAL(12,2);
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE COMPANY_STAFF RENAME COLUMN EMPNAME TO EMPLOYEE_NAME VARCHAR(50);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VARCHAR(50)' at line 1
+mysql> ALTER TABLE COMPANY_STAFF RENAME COLUMN EMPNAME TO EMPLOYEE_NAME;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  ALTER TABLE COMPANY_STAFF RENAME COLUMN JOINING_DATA TO DATE_OF_JOINING;
+ERROR 1054 (42S22): Unknown column 'JOINING_DATA' in 'company_staff'
+mysql>  ALTER TABLE COMPANY_STAFF RENAME COLUMN EMPJOININGDATE TO DATE_OF_JOINING;
+ERROR 1054 (42S22): Unknown column 'EMPJOININGDATE' in 'company_staff'
+mysql>  ALTER TABLE COMPANY_STAFF RENAME COLUMN EMPJOININGDATA TO DATE_OF_JOINING;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC COMPANY_STAFF;
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+| Field           | Type                                               | Null | Key | Default | Extra |
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+| COMPANY_NAME    | varchar(50)                                        | YES  |     | NULL    |       |
+| EMPID           | int                                                | YES  |     | NULL    |       |
+| EMPAGE          | tinyint                                            | YES  |     | NULL    |       |
+| EMPEXPERIENCE   | smallint                                           | YES  |     | NULL    |       |
+| EMPGENDER       | char(1)                                            | YES  |     | NULL    |       |
+| EMPLOYEE_NAME   | varchar(100)                                       | YES  |     | NULL    |       |
+| QUALIFICATION   | varchar(50)                                        | YES  |     | NULL    |       |
+| EMPADDRESS      | tinytext                                           | YES  |     | NULL    |       |
+| EMPSALARY       | decimal(12,2)                                      | YES  |     | NULL    |       |
+| BONUS           | decimal(8,2)                                       | YES  |     | NULL    |       |
+| EMPDEPARTMENT   | enum('HR','IT','SALES','FINANCE','SUPPORT')        | YES  |     | NULL    |       |
+| STATUS          | varchar(20)                                        | YES  |     | NULL    |       |
+| EMPSKILLS       | set('JAVA','PYTHON','SQL','EXCEL','COMMUNICATION') | YES  |     | NULL    |       |
+| DATE_OF_JOINING | date                                               | YES  |     | NULL    |       |
+| EMAIL           | varchar(100)                                       | YES  |     | NULL    |       |
+| PHONE_NUMBER    | bigint                                             | YES  |     | NULL    |       |
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+16 rows in set (0.00 sec)
+
+mysql> ALTER TABLE COMPANY_STAFF DROP COLUMN BONUS;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE COMPANY_STAFF DROP COLUMN PHONE_NUMBER;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> RENAME TABLE COMPANY_STAFF TO STAFF_RECORDS;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> RENAME TABLE STAFF_RECORDS TO COMPANY_STAFF;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> ALTER TABLE COMPANY_STAFF ADD LAST_UPDATED DATE AFTER SKILLS;
+ERROR 1054 (42S22): Unknown column 'SKILLS' in 'company_staff'
+mysql>  ALTER TABLE COMPANY_STAFF ADD LAST_UPDATED DATE AFTER EMPSKILLS;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC COMPANY_STAFF;
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+| Field           | Type                                               | Null | Key | Default | Extra |
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+| COMPANY_NAME    | varchar(50)                                        | YES  |     | NULL    |       |
+| EMPID           | int                                                | YES  |     | NULL    |       |
+| EMPAGE          | tinyint                                            | YES  |     | NULL    |       |
+| EMPEXPERIENCE   | smallint                                           | YES  |     | NULL    |       |
+| EMPGENDER       | char(1)                                            | YES  |     | NULL    |       |
+| EMPLOYEE_NAME   | varchar(100)                                       | YES  |     | NULL    |       |
+| QUALIFICATION   | varchar(50)                                        | YES  |     | NULL    |       |
+| EMPADDRESS      | tinytext                                           | YES  |     | NULL    |       |
+| EMPSALARY       | decimal(12,2)                                      | YES  |     | NULL    |       |
+| EMPDEPARTMENT   | enum('HR','IT','SALES','FINANCE','SUPPORT')        | YES  |     | NULL    |       |
+| STATUS          | varchar(20)                                        | YES  |     | NULL    |       |
+| EMPSKILLS       | set('JAVA','PYTHON','SQL','EXCEL','COMMUNICATION') | YES  |     | NULL    |       |
+| LAST_UPDATED    | date                                               | YES  |     | NULL    |       |
+| DATE_OF_JOINING | date                                               | YES  |     | NULL    |       |
+| EMAIL           | varchar(100)                                       | YES  |     | NULL    |       |
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+15 rows in set (0.00 sec)
+
+mysql>
